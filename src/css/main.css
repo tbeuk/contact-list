@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Varta:wght@400;500;600&display=swap');
+
+:root {
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-jelly-bean: #2C96A2;
+  --color-tower-gray: #B3BCBB;
+  --color-powder-ash: #B4BEBC;
+  --color-porcelain-ash: #E7EBEB;
+  --color-black-haze: #E7EAEA;
+  --font-varta: 'Varta', sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+  color: var(--color-tower-gray);
+}
+
+body {
+  background-color: var(--color-white);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-varta);
+  outline: none;
+}
+
+a {
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
