@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 60px;
 }
 
 .searchContent {
@@ -18,7 +19,7 @@
   width: 540px;
   height: 60px;
   border-radius: 5px;
-  border: 1px solid #E7E7E7;
+  border: 1px solid var(--color-mercury);
   padding: 5px 10px 0px 50px;
   font-size: 18px;
   color: var(--color-tower-gray);
@@ -30,6 +31,11 @@
 }
 
 @media only screen and (max-width: 590px) {
+  .searchContainer {
+    margin-bottom: 30px;
+    padding: 0px 20px;
+  }
+
   .searchContent {
     width: 100%;
   }

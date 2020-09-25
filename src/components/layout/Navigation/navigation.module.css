@@ -40,7 +40,7 @@
   background-color: var(--color-tower-gray);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 590px) {
   .nav {
     padding: 15px 0px;
     margin: 0 auto 30px auto;
@@ -48,5 +48,14 @@
 
   .navItem {
     font-size: 16px;
+  }
+
+  .navLine {
+    width: calc(100% - 40px);
+    left: auto;
+  }
+
+  .navItemDivider {
+    top: 0;
   }
 }

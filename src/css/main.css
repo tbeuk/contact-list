@@ -9,6 +9,7 @@
   --color-powder-ash: #B4BEBC;
   --color-porcelain-ash: #E7EBEB;
   --color-black-haze: #E7EAEA;
+  --color-iron: #E0E4E3;
   --font-varta: 'Varta', sans-serif;
 }
 
@@ -42,4 +43,6 @@ p {
   font-weight: 600;
 }
 
-
+button:hover {
+  cursor: pointer;
+}

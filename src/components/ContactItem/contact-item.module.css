@@ -1,0 +1,92 @@
+.contactItem {
+  min-height: 150px;
+  border: 1px solid var(--color-iron);
+  border-radius: 5px;
+  transition: all .3s;
+  padding: 15px;
+}
+
+.iconsContainer {
+  display: flex;
+}
+
+.heartIconContainer, .fullHeartIconContainer {
+  margin-right: auto;
+}
+
+.deleteIconContainer {
+  margin-left: 30px;
+}
+
+.contactEditIcon {
+  opacity: 0;
+  transition: all.3s;
+}
+
+.contactDeleteIcon {
+  opacity: 0;
+  transition: all.3s;
+}
+
+.contactItem:hover {
+  cursor: pointer;
+  border: 1px solid var(--color-jelly-bean);
+}
+
+.contactItem:hover .contactEditIcon,
+.contactItem:hover .contactDeleteIcon {
+  opacity: 1;
+}
+
+.contactImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  border: 3px solid var(--color-black-haze);
+}
+
+.contactInfoContainer {
+  text-align: center;
+  position: relative;
+  top: -5px;
+}
+
+.contactInfoContainer p {
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 590px) {
+  .contactItem  {
+    min-height: 60px;
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 15px;
+  }
+
+  .contactEditIcon, .contactDeleteIcon {
+    opacity: 1;
+  }
+
+  .contactInfoContainer {
+    text-align: left;
+    position: static;
+    display: flex;
+    align-items: center;
+  }
+
+  .contactInfoContainer p {
+    font-size: 16px;
+    margin-left: 20px;
+  }
+
+  .contactImg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .editIconContainer  {
+    margin-left: 30px;
+  }
+}
