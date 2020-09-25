@@ -1,7 +1,15 @@
 import React from 'react'
 
-const FavouriteContacts = () => {
-  return <h1>Favourite Contacts</h1>
+import { Navigation } from '../../components/layout/Navigation'
+import { Search } from '../../components/Search'
+
+function FavouriteContacts() {
+  return (
+    <>
+      <Navigation />
+      <Search />
+    </>
+  )
 }
 
 export default FavouriteContacts
