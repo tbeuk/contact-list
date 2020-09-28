@@ -20,7 +20,7 @@ function UploadIcon({ width, height, fillColor, className }) {
 
 UploadIcon.defaultProps = {
   className: '',
-  width: 21,
+  width: 25,
   height: 20,
   fillColor: '#FFFFFF',
 }

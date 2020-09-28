@@ -1,5 +1,5 @@
 .contactItem {
-  min-height: 150px;
+  height: 150px;
   border: 1px solid var(--color-iron);
   border-radius: 5px;
   transition: all .3s;
@@ -57,6 +57,7 @@
 
 @media only screen and (max-width: 590px) {
   .contactItem  {
+    height: auto;
     min-height: 60px;
     display: flex;
     flex-flow: row-reverse;
@@ -79,6 +80,7 @@
   .contactInfoContainer p {
     font-size: 16px;
     margin-left: 20px;
+    padding-right: 10px;
   }
 
   .contactImg {

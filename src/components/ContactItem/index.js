@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom'
 
 import { HeartIcon } from '../Icons/HeartIcon'
 import { HeartFullIcon } from '../Icons/HeartFullIcon'
@@ -8,7 +10,7 @@ import { DeleteIcon } from '../Icons/DeleteIcon'
 import styles from './contact-item.module.css'
 import Avatar from '../../images/avatar.jpg'
 
-function ContactItem() {
+function ContactItem({ fullName, id }) {
   const [heartIconVisible, setHeartIconVisible] = useState(true)
 
   const toggleHeartIcon = () => {
@@ -30,19 +32,32 @@ function ContactItem() {
             <HeartFullIcon className={styles.contactHeartIcon} />
           </div>
         )}
-        <div className={styles.editIconContainer}>
+        <NavLink
+          to={`/contact-edit/${id}`}
+          className={styles.editIconContainer}
+        >
           <EditIcon className={styles.contactEditIcon} />
-        </div>
+        </NavLink>
         <div className={styles.deleteIconContainer}>
           <DeleteIcon className={styles.contactDeleteIcon} />
         </div>
       </div>
       <div className={styles.contactInfoContainer}>
         <img className={styles.contactImg} src={Avatar} alt="avatar" />
-        <p>John Doe</p>
+        <p>{fullName}</p>
       </div>
     </div>
   )
+}
+
+ContactItem.defaultProps = {
+  fullName: '',
+  id: '',
+}
+
+ContactItem.propTypes = {
+  fullName: PropTypes.string,
+  id: PropTypes.string,
 }
 
 export { ContactItem }

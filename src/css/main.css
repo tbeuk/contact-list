@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Varta:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varta:wght@400;500;600;700&display=swap');
 
 :root {
   --color-white: #FFFFFF;
@@ -44,5 +44,9 @@ p {
 }
 
 button:hover {
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
   cursor: pointer;
 }
