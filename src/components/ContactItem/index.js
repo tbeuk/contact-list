@@ -10,7 +10,7 @@ import { DeleteIcon } from '../Icons/DeleteIcon'
 import styles from './contact-item.module.css'
 import Avatar from '../../images/avatar.jpg'
 
-function ContactItem({ fullName, id }) {
+function ContactItem({ fullName, id, imgSrc }) {
   const [heartIconVisible, setHeartIconVisible] = useState(true)
 
   const toggleHeartIcon = () => {
@@ -43,7 +43,11 @@ function ContactItem({ fullName, id }) {
         </div>
       </div>
       <div className={styles.contactInfoContainer}>
-        <img className={styles.contactImg} src={Avatar} alt="avatar" />
+        <img
+          className={styles.contactImg}
+          src={imgSrc || Avatar}
+          alt="avatar"
+        />
         <p>{fullName}</p>
       </div>
     </div>
@@ -53,11 +57,13 @@ function ContactItem({ fullName, id }) {
 ContactItem.defaultProps = {
   fullName: '',
   id: '',
+  imgSrc: '',
 }
 
 ContactItem.propTypes = {
   fullName: PropTypes.string,
   id: PropTypes.string,
+  imgSrc: PropTypes.string,
 }
 
 export { ContactItem }

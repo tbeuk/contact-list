@@ -13,7 +13,7 @@
 
 .navLine {
   height: 2px;
-  background-color: #95CAD0;
+  background-color: var(--color-half-baked);
   border-radius: 5px;
   width: 100%;
   position: absolute;

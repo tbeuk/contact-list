@@ -21,6 +21,7 @@ function ContactsList() {
             key={`item-${index}`}
             id={item.id}
             fullName={item.fullName}
+            imgSrc={item.imgSrc}
           />
         )
       })}

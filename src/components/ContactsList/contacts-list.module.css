@@ -18,7 +18,7 @@
 }
 
 .addContactBtn p {
-  color: #8ACCD1;
+  color: var(--color-half-baked);
   margin-top: 10px;
   font-weight: 500;
 }

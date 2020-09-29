@@ -19,8 +19,10 @@ import { displayPhoneError } from '../../utils/displayPhoneError'
 
 import styles from './contact-form.module.css'
 
-function ContactForm({ fullName, email, numbers, id }) {
+function ContactForm({ fullName, email, numbers, id, imgSrc }) {
   const history = useHistory()
+  const [imgUploadSrc, setImageSrc] = React.useState(imgSrc)
+  const uploadImgInput = React.useRef(null)
   const { register, control, handleSubmit, errors } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onSubmit',
@@ -42,10 +44,12 @@ function ContactForm({ fullName, email, numbers, id }) {
     // todo - move state to redux
     // if there is no prop id we are creating new contact
     data.id = id || uuidv4()
+    data.imgSrc = imgUploadSrc
     const contacts = localStorage.getItem('contacts')
 
     if (!contacts) {
       localStorage.setItem('contacts', JSON.stringify([data]))
+      history.push('/')
     } else {
       const newContacts = JSON.parse(contacts)
       const contactIndex = newContacts.findIndex((contact) => contact.id === id)
@@ -62,22 +66,55 @@ function ContactForm({ fullName, email, numbers, id }) {
     }
   }
 
+  const uploadImageHandle = () => {
+    uploadImgInput.current.click()
+  }
+
+  const uploadInputHandle = (event) => {
+    const file = event.target.files[0]
+    const reader = new FileReader()
+    reader.onloadend = function () {
+      setImageSrc(reader.result)
+    }
+    reader.readAsDataURL(file)
+  }
+
   return (
     <div className={styles.contactFormContainer}>
       <div className={styles.uploadImageContainer}>
         <input
           className={styles.imageInput}
           type="file"
-          id="imgFile"
+          accept="image/png, image/jpeg"
+          ref={uploadImgInput}
           name="filename"
+          onChange={uploadInputHandle}
         />
-        <button className={styles.uploadImageButton} type="button">
-          <UploadIcon />
-        </button>
+        {!imgUploadSrc ? (
+          <button
+            onClick={uploadImageHandle}
+            className={styles.uploadImageButton}
+            type="button"
+          >
+            <UploadIcon />
+          </button>
+        ) : (
+          <>
+            <button
+              onClick={() => setImageSrc('')}
+              className={styles.deleteImageButton}
+            >
+              <AddIcon fillColor="#ffffff" />
+            </button>
+            <img className={styles.profileImg} src={imgUploadSrc} />
+          </>
+        )}
       </div>
+
       <NavLink to="/" className={styles.backButton}>
         <ArrowBackIcon height={20} width={20} />
       </NavLink>
+
       <form className={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>
@@ -205,6 +242,7 @@ function ContactForm({ fullName, email, numbers, id }) {
 
 ContactForm.defaultProps = {
   id: '',
+  imgSrc: '',
   fullName: '',
   email: '',
   numbers: [{ phoneNumber: '', phoneLabel: '' }],
@@ -212,6 +250,7 @@ ContactForm.defaultProps = {
 
 ContactForm.propTypes = {
   id: PropTypes.string,
+  imgSrc: PropTypes.string,
   fullName: PropTypes.string,
   email: PropTypes.string,
   numbers: PropTypes.array,
