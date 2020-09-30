@@ -19,8 +19,8 @@ function HeartIcon({ width, height, fillColor, className }) {
 
 HeartIcon.defaultProps = {
   className: '',
-  width: 15,
-  height: 14,
+  width: 16,
+  height: 17,
   fillColor: '#BBC4C3',
 }
 

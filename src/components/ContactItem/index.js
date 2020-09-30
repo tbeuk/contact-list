@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { HeartIcon } from '../Icons/HeartIcon'
 import { HeartFullIcon } from '../Icons/HeartFullIcon'
@@ -11,14 +11,25 @@ import styles from './contact-item.module.css'
 import Avatar from '../../images/avatar.jpg'
 
 function ContactItem({ fullName, id, imgSrc }) {
+  const history = useHistory()
   const [heartIconVisible, setHeartIconVisible] = useState(true)
 
   const toggleHeartIcon = () => {
     setHeartIconVisible(!heartIconVisible)
   }
 
+  const editContactHandle = (event) => {
+    event.stopPropagation()
+    history.push(`/contact-edit/${id}`)
+  }
+
   return (
-    <div className={styles.contactItem}>
+    <div
+      onClick={() => {
+        history.push(`/contact/${id}`)
+      }}
+      className={styles.contactItem}
+    >
       <div className={styles.iconsContainer}>
         {heartIconVisible ? (
           <div className={styles.heartIconContainer} onClick={toggleHeartIcon}>
@@ -32,12 +43,9 @@ function ContactItem({ fullName, id, imgSrc }) {
             <HeartFullIcon className={styles.contactHeartIcon} />
           </div>
         )}
-        <NavLink
-          to={`/contact-edit/${id}`}
-          className={styles.editIconContainer}
-        >
+        <button onClick={editContactHandle} className={styles.editIconButton}>
           <EditIcon className={styles.contactEditIcon} />
-        </NavLink>
+        </button>
         <div className={styles.deleteIconContainer}>
           <DeleteIcon className={styles.contactDeleteIcon} />
         </div>

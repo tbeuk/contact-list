@@ -1,0 +1,234 @@
+.contactDetailContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 25px;
+} 
+
+.contactDetailHeader {
+  display: flex;
+}
+
+
+.mobileHeaderTop {
+  display: none
+}
+
+.contactImg {
+  position: relative;
+  top: 20px;
+}
+
+.contactImg, .contactImgMobile {
+  width: 185px;
+  height: 185px;
+  border-radius: 100px;
+  border: 3px solid var(--color-black-haze);
+}
+
+.contactImgMobile {
+  width: 55px;
+  height: 55px;
+  display: none;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  margin-left: 25px;
+  align-self: center;
+  border-bottom: 2px solid var(--color-half-baked);
+  padding-bottom: 10px;
+}
+
+.headerContentLeft {
+  display: flex;
+  align-items: center;
+}
+
+.headerContentLeft h1 {
+  margin-left: 25px;
+}
+
+.headerContentLeft svg {
+  position: relative;
+  bottom: 5px;
+}
+
+.headerContentRight {
+  display: flex;
+}
+
+.contactDetailEditIcon {
+  margin-left: 50px;
+  position: relative;
+  bottom: -1px;
+}
+
+.contactDetailContent {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 0px 25px 0px 65px;
+  font-size: 16px;
+}
+
+.contactDetailContent p {
+  font-size: 16px;
+}
+
+.contactEmailContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 70px;
+}
+
+.contactEmailContent {
+  display: flex;
+  align-items: center;
+}
+
+.contactEmailContent p {
+  color: var(--color-jelly-bean);
+  padding-left: 20px;
+}
+
+.contactEmailContent svg {
+  position: relative;
+  top: -2px;
+}
+
+.contactEmail {
+  width: 220px;
+  padding-left: 37px;
+}
+
+.contactNumbersContainer {
+  display: flex;
+}
+
+.contactNumbersContent {
+  display: flex;
+}
+
+.contactNumbersContent p {
+  color: var(--color-jelly-bean);
+  margin-left: 15px;
+}
+
+.contactNumbersContent svg {
+  position: relative;
+  top: 2px;
+}
+
+.contactNumbersList {
+  width: 220px;
+  padding-left: 20px;
+}
+
+.contactNumberContent {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.numberValue {
+  text-decoration: underline;
+  padding-left: 5px;
+  text-align: right;
+}
+
+.numberLabel {
+  margin-right: 30px;
+  min-width: 70px;
+  text-transform: uppercase;
+}
+
+.backButton {
+  background-color: transparent;
+  border: none;
+  line-height: 10px;
+}
+
+@media only screen and (max-width: 750px) {
+  .contactDetailContainer  {
+    padding: 15px 0px;
+
+  }
+
+  .contactDetailHeader {
+    display: block;
+  }
+
+  .mobileHeaderTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 0px 25px 10px 25px;
+    border-bottom: 2px solid var(--color-black-haze);
+  }
+
+  .contactImg {
+    display: none;
+  }
+
+  .headerContent {
+    margin-bottom: 30px;
+    margin-left: 0px;
+    padding: 0px 25px;
+  }
+
+  .headerContentLeft {
+    padding-bottom: 20px;
+  }
+
+  .headerContentLeft svg {
+    display: none;
+  }
+
+  .headerContentLeft h1 {
+    font-size: 24px;
+  }
+
+  .headerContentRight {
+    display: none;
+  }
+
+  .contactDetailContent {
+    max-width: 100%;
+    padding: 0px 25px 0px 50px;
+  }
+
+  .contactEmail {
+    padding-left: 25px;
+    margin-top: 15px;
+  }
+
+  .contactEmailContainer {
+    display: block;
+    margin-bottom: 50px;
+  }
+
+  .contactNumbersContainer {
+    display: block;
+    margin-bottom: 50px;
+  }
+
+  .contactNumbersContent p {
+    margin-left: 10px;
+  }
+
+  .contactNumbersList {
+    margin-top: 15px;
+    padding-left: 25px;
+    width: 250px;
+  }
+
+  .contactEmailContent p {
+    margin-left: 0px;
+    padding-left: 10px;
+  }
+
+  .contactImgMobile {
+    display: block;
+  }
+}

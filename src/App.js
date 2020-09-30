@@ -23,11 +23,7 @@ function App() {
             <Route path="/" exact component={Contacts} />
             <Route path="/favourites" exact component={FavouriteContacts} />
             <Route path="/contact-new" exact component={ContactNew} />
-            <Route
-              path="/contact-details/:userId"
-              exact
-              component={ContactDetails}
-            />
+            <Route path="/contact/:userId" exact component={ContactDetails} />
             <Route path="/contact-edit/:userId" exact component={ContactEdit} />
             <Route path="/" component={ErrorPage} />
             <Route />
