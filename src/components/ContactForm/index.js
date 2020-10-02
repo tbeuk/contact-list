@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { useDispatch } from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
 
@@ -10,6 +10,7 @@ import { PhoneIcon } from '../Icons/PhoneIcon'
 import { AddIcon } from '../Icons/AddIcon'
 import { ArrowBackIcon } from '../Icons/ArrowBackIcon'
 import { UploadIcon } from '../Icons/UploadIcon'
+import { DeleteIcon } from '../Icons/DeleteIcon'
 
 import { uuidv4 } from '../../utils/uuid'
 import { validateName } from '../../utils/validateName'
@@ -17,13 +18,15 @@ import { validatePhone } from '../../utils/validatePhone'
 import { ValidateEmail } from '../../utils/validateEmail'
 import { displayPhoneError } from '../../utils/displayPhoneError'
 
+import * as actionCreators from '../../store/actions'
 import styles from './contact-form.module.css'
 
 function ContactForm({ fullName, email, numbers, id, imgSrc }) {
   const history = useHistory()
+  const dispatch = useDispatch()
   const [imgUploadSrc, setImageSrc] = React.useState(imgSrc)
   const uploadImgInput = React.useRef(null)
-  const { register, control, handleSubmit, errors } = useForm({
+  const { register, control, handleSubmit, reset, errors } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onSubmit',
     defaultValues: {
@@ -37,31 +40,31 @@ function ContactForm({ fullName, email, numbers, id, imgSrc }) {
     name: 'numbers',
   })
 
+  React.useEffect(() => {
+    // reset default values to update the form
+    reset({
+      fullName,
+      email,
+      numbers,
+    })
+  }, [fullName, email, numbers])
+
+  React.useEffect(() => {
+    setImageSrc(imgSrc)
+  }, [imgSrc])
+
   const deletePhoneNumberDisabled =
     fields.length > 1 ? '' : styles.deleteNumberDisabled
 
   const onSubmit = (data) => {
-    // todo - move state to redux
-    // if there is no prop id we are creating new contact
     data.id = id || uuidv4()
     data.imgSrc = imgUploadSrc
-    const contacts = localStorage.getItem('contacts')
 
-    if (!contacts) {
-      localStorage.setItem('contacts', JSON.stringify([data]))
+    if (!id) {
+      dispatch(actionCreators.addContact(data))
       history.push('/')
     } else {
-      const newContacts = JSON.parse(contacts)
-      const contactIndex = newContacts.findIndex((contact) => contact.id === id)
-
-      // if contact exists update object
-      if (contactIndex >= 0) {
-        newContacts[contactIndex] = data
-      } else {
-        newContacts.push(data)
-      }
-
-      localStorage.setItem('contacts', JSON.stringify(newContacts))
+      dispatch(actionCreators.updateContact(data))
       history.push('/')
     }
   }
@@ -77,6 +80,12 @@ function ContactForm({ fullName, email, numbers, id, imgSrc }) {
       setImageSrc(reader.result)
     }
     reader.readAsDataURL(file)
+  }
+
+  const deleteContactHandle = (event) => {
+    event.stopPropagation()
+    dispatch(actionCreators.deleteContact(id))
+    history.push('/')
   }
 
   return (
@@ -106,14 +115,26 @@ function ContactForm({ fullName, email, numbers, id, imgSrc }) {
             >
               <AddIcon fillColor="#ffffff" />
             </button>
-            <img className={styles.profileImg} src={imgUploadSrc} />
+            <img
+              className={styles.profileImg}
+              src={imgUploadSrc}
+              alt="profile"
+            />
           </>
         )}
       </div>
 
-      <NavLink to="/" className={styles.backButton}>
-        <ArrowBackIcon height={20} width={20} />
-      </NavLink>
+      <div className={styles.topButtonsContainer}>
+        <NavLink to="/" className={styles.backButton}>
+          <ArrowBackIcon height={20} width={20} />
+        </NavLink>
+        <button
+          onClick={deleteContactHandle}
+          className={styles.deleteContactButton}
+        >
+          <DeleteIcon />
+        </button>
+      </div>
 
       <form className={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputContainer}>

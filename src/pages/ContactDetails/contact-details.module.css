@@ -149,6 +149,11 @@
   line-height: 10px;
 }
 
+.heartIconButton {
+  background-color: transparent;
+  border: none;
+}
+
 @media only screen and (max-width: 750px) {
   .contactDetailContainer  {
     padding: 15px 0px;
@@ -230,5 +235,10 @@
 
   .contactImgMobile {
     display: block;
+  }
+
+  .contactNumberContent {
+    display: flex;
+    margin-bottom: 30px;
   }
 }

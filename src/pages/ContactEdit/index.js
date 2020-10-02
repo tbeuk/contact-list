@@ -1,39 +1,31 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { ContactForm } from '../../components/ContactForm'
 
-const ContactEdit = ({ history }) => {
+const ContactEdit = () => {
   const { userId } = useParams()
-  let contact = []
+  const history = useHistory()
+  const contacts = useSelector((state) => state.contacts)
+  const [contact, setContact] = React.useState()
 
-  if (!localStorage.getItem('contacts')) {
-    history.push('/')
-  } else {
-    const contacts = JSON.parse(localStorage.getItem('contacts'))
-    contact = contacts.filter((item) => {
-      return item.id === userId
-    })
-
-    if (!contact.length) {
+  React.useEffect(() => {
+    if (!userId) {
       history.push('/')
+    } else {
+      const contactIndex = contacts.findIndex(
+        (contact) => contact.id === userId
+      )
+      setContact(contacts[contactIndex])
     }
-  }
+  }, [contacts, history, userId])
 
   return (
     <>
-      <ContactForm {...contact[0]} />
+      <ContactForm {...contact} />
     </>
   )
-}
-
-ContactEdit.defaultProps = {
-  history: {},
-}
-
-ContactEdit.propTypes = {
-  history: PropTypes.object,
 }
 
 export default ContactEdit

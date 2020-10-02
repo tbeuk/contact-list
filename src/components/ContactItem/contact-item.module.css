@@ -10,11 +10,13 @@
   display: flex;
 }
 
-.heartIconContainer, .fullHeartIconContainer {
+.heartIconButton {
   margin-right: auto;
+  background-color: transparent;
+  border: none;
 }
 
-.deleteIconContainer {
+.deleteContactButton {
   margin-left: 30px;
 }
 
@@ -23,7 +25,7 @@
   transition: all.3s;
 }
 
-.editIconButton {
+.editContactButton, .deleteContactButton {
   background-color: transparent;
   border: none;
 }
@@ -93,7 +95,7 @@
     height: 40px;
   }
 
-  .editIconButton  {
+  .editContactButton  {
     margin-left: 30px;
   }
 }

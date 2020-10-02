@@ -156,7 +156,6 @@
 
 .backButton {
   grid-column: 2;
-  padding-top: 35px;
   width: 25px;
 }
 
@@ -212,6 +211,19 @@
   align-items: center;
 }
 
+.deleteContactButton {
+  background-color: transparent;
+  border: none;
+}
+
+.topButtonsContainer {
+  grid-column: 2;
+  padding-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media only screen and (max-width: 920px) {
   .contactFormContainer {
     grid-template-columns: 100%;
@@ -220,8 +232,11 @@
   }
 
   .backButton {
-    grid-column: 1;
     padding-top: 5px;
+  }
+
+  .topButtonsContainer {
+    grid-column: 1;
   }
 
   .contactForm {
@@ -234,6 +249,13 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
+    width: 150px;
+    height: 150px;
+  }
+
+  .uploadImageButton, .deleteImageButton {
+    width: 150px;
+    height: 150px;
   }
 
   .input {
@@ -243,6 +265,7 @@
 
   .phoneInputsContainer {
     display: block;
+    margin-bottom: 40px;
   }
 
   .phoneInputsContainer input {

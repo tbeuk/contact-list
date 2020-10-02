@@ -1,37 +1,53 @@
 import React from 'react'
-import { NavLink, useHistory, useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import Avatar from '../../images/avatar.jpg'
 import { HeartIcon } from '../../components/Icons/HeartIcon'
+import { HeartFullIcon } from '../../components/Icons/HeartFullIcon'
 import { EditIcon } from '../../components/Icons/EditIcon'
 import { ArrowBackIcon } from '../../components/Icons/ArrowBackIcon'
 import { EmailIcon } from '../../components/Icons/EmailIcon'
 import { PhoneIcon } from '../../components/Icons/PhoneIcon'
 
+import * as actionCreators from '../../store/actions'
+
 import styles from './contact-details.module.css'
 
 const ContactDetails = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const { userId } = useParams()
   const [contact, setContact] = React.useState({})
+  const contacts = useSelector((state) => state.contacts)
+  const favsArray = useSelector((state) => state.favs)
+  const [heartIconVisible, setHeartIconVisible] = React.useState(true)
 
   React.useEffect(() => {
-    const contacts = localStorage.getItem('contacts')
-
-    if (!userId || !contacts) {
-      history.push('/')
+    const contactArray = contacts.filter((contact) => contact.id === userId)
+    if(contactArray.length) {
+      setContact(contactArray[0])
     } else {
-      const contactArr = JSON.parse(contacts).filter((contact) => {
-        return contact.id === userId
-      })
-
-      if (!contactArr.length) {
-        history.push('/')
-      } else {
-        setContact({ ...contactArr[0] })
-      }
+      history.push('/')
     }
-  }, [])
+  }, [contacts])
+
+  React.useEffect(() => {
+    const favIndex = favsArray.findIndex((contactId) => {
+      return contactId === userId
+    })
+    // if contact item is inside favourite contacts
+    if (favIndex >= 0) {
+      setHeartIconVisible(false)
+    }
+  }, [favsArray, userId])
+
+  const toggleHeartIcon = (event) => {
+    event.stopPropagation()
+    setHeartIconVisible(!heartIconVisible)
+    dispatch(actionCreators.toggleFavContact(userId))
+  }
 
   return (
     <div className={styles.contactDetailContainer}>
@@ -41,7 +57,15 @@ const ContactDetails = () => {
             <ArrowBackIcon height={20} width={20} />
           </NavLink>
           <div>
-            <HeartIcon />
+          {heartIconVisible ? (
+            <button className={styles.heartIconButton} onClick={toggleHeartIcon}>
+              <HeartIcon className={styles.contactHeartIcon} />
+            </button>
+            ) : (
+            <button className={styles.heartIconButton} onClick={toggleHeartIcon}>
+              <HeartFullIcon className={styles.contactHeartIcon} />
+            </button>
+            )}
             <NavLink to={`/contact-edit/${userId}`}>
               <EditIcon className={styles.contactDetailEditIcon} />
             </NavLink>
@@ -54,14 +78,22 @@ const ContactDetails = () => {
         />
         <div className={styles.headerContent}>
           <div className={styles.headerContentLeft}>
-            <img className={styles.contactImgMobile} src={Avatar} alt="" />
+            <img className={styles.contactImgMobile} src={contact.imgSrc || Avatar} alt="" />
             <NavLink to="/" className={styles.backButton}>
               <ArrowBackIcon height={20} width={20} />
             </NavLink>
             <h1>{contact.fullName}</h1>
           </div>
           <div className={styles.headerContentRight}>
-            <HeartIcon />
+          {heartIconVisible ? (
+            <button className={styles.heartIconButton} onClick={toggleHeartIcon}>
+              <HeartIcon className={styles.contactHeartIcon} />
+            </button>
+            ) : (
+            <button className={styles.heartIconButton} onClick={toggleHeartIcon}>
+              <HeartFullIcon className={styles.contactHeartIcon} />
+            </button>
+            )}
             <NavLink to={`/contact-edit/${userId}`}>
               <EditIcon className={styles.contactDetailEditIcon} />
             </NavLink>
