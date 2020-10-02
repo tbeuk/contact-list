@@ -23,11 +23,7 @@ function Contacts() {
     <>
       <Navigation />
       <Search onInputChange={filterContactsInput} />
-      {contactList.length ? (
-        <ContactsList contacts={contactList} />
-      ) : (
-        <h1 style={{ textAlign: 'center' }}>No contacts found</h1>
-      )}
+      <ContactsList contacts={contactList} />
     </>
   )
 }

@@ -62,6 +62,10 @@
   color: var(--color-powder-ash);
 }
 
+.input::placeholder {
+  color: var(--color-tower-gray);
+}
+
 .input.phoneLabelInput {
   width: 240px;
 }

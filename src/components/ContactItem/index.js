@@ -8,6 +8,8 @@ import { HeartFullIcon } from '../Icons/HeartFullIcon'
 import { EditIcon } from '../Icons/EditIcon'
 import { DeleteIcon } from '../Icons/DeleteIcon'
 
+import { Modal } from '../Modal'
+
 import styles from './contact-item.module.css'
 import Avatar from '../../images/avatar.jpg'
 import * as actionCreators from '../../store/actions'
@@ -17,6 +19,7 @@ function ContactItem({ fullName, id, imgSrc }) {
   const dispatch = useDispatch()
   const favsArray = useSelector((state) => state.favs)
   const [heartIconVisible, setHeartIconVisible] = React.useState(true)
+  const [modalOpen, setModalOpen] = React.useState(false)
 
   React.useEffect(() => {
     const favIndex = favsArray.findIndex((contactId) => {
@@ -41,6 +44,15 @@ function ContactItem({ fullName, id, imgSrc }) {
 
   const deleteContactHandler = (event) => {
     event.stopPropagation()
+    setModalOpen(!modalOpen)
+  }
+
+  const handleCloseModal = () => {
+    setModalOpen(!modalOpen)
+  }
+
+  const handleConfirmModal = () => {
+    setModalOpen(!modalOpen)
     dispatch(actionCreators.deleteContact(id))
   }
 
@@ -82,6 +94,11 @@ function ContactItem({ fullName, id, imgSrc }) {
         />
         <p>{fullName}</p>
       </div>
+      <Modal
+        open={modalOpen}
+        onClose={handleCloseModal}
+        onConfirm={handleConfirmModal}
+      />
     </div>
   )
 }

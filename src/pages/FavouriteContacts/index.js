@@ -34,14 +34,7 @@ function FavouriteContacts() {
     <>
       <Navigation />
       <Search onInputChange={filterContactsInput} />
-      {filteredContactsList.length ? (
-        <ContactsList
-          contacts={filteredContactsList}
-          showAddContactBtn={false}
-        />
-      ) : (
-        <h1 style={{ textAlign: 'center' }}>No contacts found</h1>
-      )}
+      <ContactsList contacts={filteredContactsList} showAddContactBtn={false} />
     </>
   )
 }

@@ -1,0 +1,85 @@
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.377);
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.modal {
+  max-width: 480px;
+  min-height: 250px;
+  background-color: var(--color-white);
+  border-radius: 5px;
+}
+
+.button {
+  border: none;
+  color: var(--color-white);
+  border-radius: 25px;
+  min-width: 160px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button.greenButton {
+  background-color: var(--color-jelly-bean);
+}
+
+.button.grayButton {
+  background-color: var(--color-tower-gray);
+  margin-right: 50px;
+}
+
+.modalTitle {
+  border-bottom: 1px solid var(--color-tower-gray);
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.message {
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.modalButtons {
+  display: flex;
+}
+
+.modalButtons button{
+  display: block;
+}
+
+@media only screen and (max-width: 500px) { 
+  .button.grayButton {
+    margin-right: 0px;
+    margin-top: 20px;
+  }
+
+  .modalButtons {
+    flex-direction: column-reverse;
+  }
+
+  .message {
+    text-align: center;
+  }
+}
